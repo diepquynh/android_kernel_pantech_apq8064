@@ -15,8 +15,9 @@
 #ifndef _ZRAM_DRV_H_
 #define _ZRAM_DRV_H_
 
-#include <linux/spinlock.h>
+#include <linux/rwsem.h>
 #include <linux/zsmalloc.h>
+#include <linux/crypto.h>
 
 #include "zcomp.h"
 
@@ -112,6 +113,6 @@ struct zram {
 	u64 disksize;	/* bytes */
 	int max_comp_streams;
 	struct zram_stats stats;
-	char compressor[10];
+	char compressor[CRYPTO_MAX_ALG_NAME];
 };
 #endif
