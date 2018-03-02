@@ -175,8 +175,12 @@ retry:
 		goto retry;
 	}
 
-	level = 31;
-	timeoutms = value;
+	level = (value >> 16) & 0xFFFF;
+	timeoutms = value & 0xFFFF;
+
+	if (level > 0) {
+		level = ((level*70) / 100) + 6 + 11; //1.7v~3.1v
+		}
 
 	vib->level = level;
 	
